@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Network Engineering Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Advanced Network Engineering Application</h1>
+    </header>
+    <main>
+        <section id="classified-packets">
+            <h2>Classified Packets</h2>
+            <form method="POST" action="/filter">
+                <label for="ip_address">Filter by IP Address:</label>
+                <input type="text" id="ip_address" name="ip_address">
+                <button type="submit">Filter</button>
+            </form>
+            <h3>TCP Packets</h3>
+            <ul>
+                {% for packet in classified_packets['TCP'] %}
+                    <li>{{ packet.summary() }}</li>
+                {% endfor %}
+            </ul>
+            <h3>UDP Packets</h3>
+            <ul>
+                {% for packet in classified_packets['UDP'] %}
+                    <li>{{ packet.summary() }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section id="ai-analysis">
+            <h2>AI Traffic Analysis</h2>
+            <ul>
+                {% for result in ai_analysis_results %}
+                    <li>{{ result }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section id="network-status">
+            <h2>Network Status</h2>
+            <ul>
+                {% for key, value in network_status.items() %}
+                    <li>{{ key }}: {{ value }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
